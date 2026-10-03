@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Day 3 — Complete Revision Notes</title><style>
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#5b667a;--primary:#1769e0;--primary2:#0d47a1;--border:#dce4ef;--code:#101827;--shadow:0 8px 25px rgba(23,32,51,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+header{background:linear-gradient(135deg,#0d47a1,#1976d2);color:white;padding:42px 20px}.hero{max-width:1100px;margin:auto}.hero h1{font-size:clamp(30px,5vw,48px);margin:0 0 8px}.hero p{margin:5px 0;color:#e5efff;font-size:17px}
+.container{max-width:1100px;margin:28px auto;padding:0 16px}.toc,section{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.toc{padding:20px}.toc h2{margin-top:0}.toc a{display:inline-block;margin:5px 8px 5px 0;color:var(--primary);text-decoration:none;font-weight:700}
+section{padding:26px;margin:22px 0}h2{color:var(--primary2);margin-top:0;border-bottom:2px solid #e8eef7;padding-bottom:8px}h3{color:#243b64;margin-top:24px}p{margin:9px 0}ul,ol{padding-left:24px}li{margin:5px 0}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini{border:1px solid var(--border);border-radius:12px;padding:16px;background:#fbfdff}.mini h3{margin-top:0}
+code{background:#eef2f7;padding:2px 6px;border-radius:5px}pre{background:var(--code);color:#e8eef8;padding:18px;border-radius:12px;overflow:auto;line-height:1.5;border:1px solid #263449}pre code{background:none;padding:0;color:inherit}
+table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}th{background:#edf4ff}
+.note,.tip,.warn,.exam{border-left:5px solid;padding:13px 16px;border-radius:9px;margin:15px 0}.note{background:#eaf4ff;border-color:#2980ef}.tip{background:#eaf8ef;border-color:#27a65b}.warn{background:#fff7df;border-color:#e2a500}.exam{background:#f1edff;border-color:#7656d6}
+details{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:10px 0;background:#fafcff}summary{cursor:pointer;font-weight:700}.badge{display:inline-block;padding:4px 9px;border-radius:20px;background:#e9f2ff;color:#1457b8;font-size:13px;font-weight:700;margin:3px}
+footer{text-align:center;color:var(--muted);padding:30px 15px}@media(max-width:700px){section{padding:19px}.container{padding:0 10px}pre{font-size:13px}th,td{font-size:14px}}
+</style></head>
+<body><header><div class="hero"><h1>C++ Day 3 — Complete Revision Notes</h1><p>Sessions 11–15 • Virtual Functions, Exceptions, File Handling, Templates, STL & RTTI</p>
+<p><span class="badge">C++17</span><span class="badge">PGCP-AC August 2026</span><span class="badge">Easy Revision Notes</span></p>
+</div></header><div class="container"><nav class="toc"><h2>📚 Contents</h2><a href="#coverage">Coverage</a><a href="#runtime">Runtime Polymorphism</a><a href="#casts">Casts</a><a href="#exceptions">Exceptions</a><a href="#streams">Streams & I/O</a><a href="#files">Files</a><a href="#templates">Templates</a><a href="#stl">STL</a><a href="#rtti">RTTI</a><a href="#lab">Lab Practice</a></nav>
+<section id="coverage"><h2>1. Official Coverage — Sessions 11–15</h2><div class="cardgrid">
+<div class="mini"><h3>Session 11</h3><p>Runtime polymorphism, virtual/pure virtual functions, casts, interfaces and abstract classes.</p></div>
+<div class="mini"><h3>Session 12</h3><p>Throwing, catching, rethrowing, exception specification and custom exception classes.</p></div>
+<div class="mini"><h3>Session 13</h3><p>Console I/O, streams, formatted/unformatted I/O, manipulators and files.</p></div>
+<div class="mini"><h3>Sessions 14–15</h3><p>Function/class templates, STL Stack/Vector/Queue/Map and RTTI.</p></div></div></section>
+
+<section id="runtime"><h2>2. Runtime Polymorphism</h2><p>A virtual function enables a call through a base pointer/reference to dispatch to an overriding derived implementation at runtime.</p>
+<pre><code>class Animal {
+public:
+    virtual void sound() { cout &lt;&lt; "Animal sound"; }
+};
+class Dog : public Animal {
+public:
+    void sound() override { cout &lt;&lt; "Bark"; }
+};
+Animal* p = new Dog();
+p-&gt;sound();
+delete p;</code></pre>
+<div class="note"><b>Key idea:</b> Pointer type is Animal*, object is Dog. Because sound() is virtual, Dog's implementation is selected at runtime.</div>
+<h3>Pure Virtual Function</h3><pre><code>class Shape {
+public:
+    virtual void draw() = 0;
+};</code></pre><p>A class with at least one pure virtual function is abstract and cannot be instantiated directly.</p>
+<h3>Interface-like Design</h3><p>C++ has no required separate <code>interface</code> keyword. A class made mainly from pure virtual functions can act as an interface-like contract.</p></section>
+
+<section id="casts"><h2>3. Four C++ Casts</h2>
+<table><tr><th>Cast</th><th>Main purpose</th></tr><tr><td><code>static_cast</code></td><td>Supported compile-time conversions.</td></tr><tr><td><code>dynamic_cast</code></td><td>Runtime-checked casts in polymorphic hierarchies.</td></tr><tr><td><code>const_cast</code></td><td>Add/remove const or volatile qualification.</td></tr><tr><td><code>reinterpret_cast</code></td><td>Low-level reinterpretation.</td></tr></table>
+<pre><code>class Base { public: virtual ~Base() {} };
+class Derived : public Base {};
+Base* b = new Derived();
+Derived* d = dynamic_cast&lt;Derived*&gt;(b);
+delete b;</code></pre><div class="exam"><b>MCQ:</b> dynamic_cast is associated with runtime checking in a polymorphic hierarchy.</div></section>
+
+<section id="exceptions"><h2>4. Exception Handling</h2>
+<pre><code>try {
+    int age;
+    cin &gt;&gt; age;
+    if (age &lt; 0) throw age;
+}
+catch (int x) {
+    cout &lt;&lt; "Invalid age";
+}</code></pre>
+<p><b>Flow:</b> try → throw → matching catch.</p>
+<h3>Rethrowing</h3><pre><code>try {
+    try { throw 10; }
+    catch (int x) {
+        cout &lt;&lt; "Log";
+        throw;
+    }
+}
+catch (int x) { cout &lt;&lt; "Handled again"; }</code></pre>
+<h3>Custom Exception</h3><pre><code>class InvalidMarks {
+public:
+    string message;
+    InvalidMarks(string msg) : message(msg) {}
+};
+try { throw InvalidMarks("Marks must be 0 to 100"); }
+catch (InvalidMarks&amp; e) { cout &lt;&lt; e.message; }</code></pre></section>
+
+<section id="streams"><h2>5. Console I/O, Streams and Manipulators</h2>
+<pre><code>int age;
+cin &gt;&gt; age;
+cout &lt;&lt; "Age = " &lt;&lt; age;</code></pre>
+<table><tr><th>Class</th><th>Role</th></tr><tr><td>istream</td><td>Input stream</td></tr><tr><td>ostream</td><td>Output stream</td></tr><tr><td>iostream</td><td>Input + output</td></tr><tr><td>ifstream</td><td>File input</td></tr><tr><td>ofstream</td><td>File output</td></tr><tr><td>fstream</td><td>File input + output</td></tr></table>
+<h3>Formatted I/O</h3><pre><code>#include &lt;iomanip&gt;
+double price = 12.34567;
+cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; price;</code></pre>
+<h3>Unformatted I/O</h3><pre><code>char ch;
+cin.get(ch);
+cout.put(ch);</code></pre><p>Useful manipulators include <code>setw</code>, <code>fixed</code> and <code>setprecision</code>.</p></section>
+
+<section id="files"><h2>6. File Handling</h2>
+<h3>Write</h3><pre><code>ofstream out("students.txt");
+if (out.is_open()) {
+    out &lt;&lt; "Ritik
+";
+    out &lt;&lt; "Amit
+";
+    out.close();
+}</code></pre>
+<h3>Read</h3><pre><code>ifstream in("students.txt");
+string name;
+if (in.is_open()) {
+    while (getline(in, name))
+        cout &lt;&lt; name &lt;&lt; endl;
+    in.close();
+}</code></pre>
+<div class="tip"><b>Memory:</b> ofstream → write, ifstream → read, fstream → both.</div></section>
+
+<section id="templates"><h2>7. Templates</h2>
+<p>Templates allow generic code to work with different types.</p>
+<pre><code>template &lt;typename T&gt;
+T maximum(T a, T b) {
+    return (a &gt; b) ? a : b;
+}
+cout &lt;&lt; maximum(10, 20);
+cout &lt;&lt; maximum(2.5, 1.5);</code></pre>
+<h3>Class Template</h3><pre><code>template &lt;typename T&gt;
+class Box {
+    T value;
+public:
+    Box(T v) : value(v) {}
+    T getValue() { return value; }
+};
+Box&lt;int&gt; b1(10);
+Box&lt;string&gt; b2("Hello");</code></pre></section>
+
+<section id="stl"><h2>8. STL: Stack, Vector, Queue and Map</h2>
+<h3>Vector</h3><pre><code>vector&lt;int&gt; v = {10, 20, 30};
+v.push_back(40);
+for (int x : v) cout &lt;&lt; x &lt;&lt; " ";</code></pre>
+<h3>Stack — LIFO</h3><pre><code>stack&lt;int&gt; s;
+s.push(10);
+s.push(20);
+cout &lt;&lt; s.top();
+s.pop();</code></pre>
+<h3>Queue — FIFO</h3><pre><code>queue&lt;int&gt; q;
+q.push(10);
+q.push(20);
+cout &lt;&lt; q.front();
+q.pop();</code></pre>
+<h3>Map — Key/Value</h3><pre><code>map&lt;string, int&gt; marks;
+marks["Ritik"] = 90;
+marks["Amit"] = 85;
+cout &lt;&lt; marks["Ritik"];</code></pre>
+<table><tr><th>Container</th><th>Easy memory</th></tr><tr><td>vector</td><td>Dynamic sequence</td></tr><tr><td>stack</td><td>LIFO</td></tr><tr><td>queue</td><td>FIFO</td></tr><tr><td>map</td><td>Key → value</td></tr></table></section>
+
+<section id="rtti"><h2>9. RTTI — Run-Time Type Information</h2>
+<p>RTTI provides information about an object's type at runtime.</p>
+<pre><code>#include &lt;typeinfo&gt;
+class Base { public: virtual ~Base() {} };
+class Derived : public Base {};
+Base* p = new Derived();
+cout &lt;&lt; typeid(*p).name();
+delete p;</code></pre>
+<div class="exam"><b>Remember:</b> typeid is a common RTTI feature; dynamic_cast is used for runtime-checked hierarchy casting.</div></section>
+
+<section id="lab"><h2>10. Day 3 Lab Practice</h2>
+<ol><li>Abstract class and virtual/pure virtual functions.</li><li>Printer hierarchy with virtual/pure virtual functions.</li><li>Diamond inheritance.</li><li>Exception/custom exception.</li><li>File read/write.</li><li>Function/class templates.</li><li>STL stack/vector/queue/map.</li><li>RTTI using typeid with polymorphic objects.</li></ol></section>
+<section><h2>11. Day 3 Fast Recall</h2><p><b>Virtual → Pure Virtual → Abstract → Casts → Exception → Streams → Files → Templates → STL → RTTI</b></p></section>
+</div><footer>C++17 • PGCP-AC August 2026 • Revision Notes</footer></body></html>

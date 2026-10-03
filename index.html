@@ -1,0 +1,911 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>C++ Study Hub | Day 1 - Day 4</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 470px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(96, 165, 250, 0.35), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.3), transparent 30%),
+                linear-gradient(135deg, #0f172a, #172554 50%, #1d4ed8);
+
+            color: white;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -180px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            bottom: -170px;
+            left: -100px;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            padding: 80px 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.05;
+            margin: 25px 0 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #93c5fd, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 680px;
+            font-size: 19px;
+            color: #dbeafe;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .primary-btn {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .secondary-btn {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            max-width: 1050px;
+            margin: -55px auto 0;
+            position: relative;
+            z-index: 5;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+
+            padding: 0 20px;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+
+            padding: 24px;
+            text-align: center;
+
+            box-shadow: 0 12px 35px rgba(15,23,42,0.1);
+        }
+
+        .stat strong {
+            display: block;
+            color: #1d4ed8;
+            font-size: 30px;
+            margin-bottom: 3px;
+        }
+
+        .stat span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 75px 20px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .section-heading small {
+            color: #2563eb;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            font-size: 36px;
+            margin: 8px 0;
+            color: #172554;
+        }
+
+        .section-heading p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           DAY CARDS
+        ========================= */
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .day-card {
+            position: relative;
+            overflow: hidden;
+
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow: 0 8px 25px rgba(15,23,42,0.06);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+            border-color: #93c5fd;
+        }
+
+        .day-card::after {
+            content: "";
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+
+            top: -55px;
+            right: -55px;
+
+            transition: 0.3s ease;
+        }
+
+        .day-card:hover::after {
+            transform: scale(1.3);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .day-label {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+            color: #1d4ed8;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .day-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            font-size: 24px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .day-card h3 {
+            font-size: 26px;
+            color: #172554;
+
+            margin: 25px 0 8px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .day-card > p {
+            color: #64748b;
+            min-height: 75px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* Topics */
+
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            margin: 18px 0 24px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .topic {
+            padding: 5px 9px;
+
+            border-radius: 6px;
+
+            background: #f1f5f9;
+            color: #475569;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* Card bottom */
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-text {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .open-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            text-decoration: none;
+
+            padding: 10px 16px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .open-btn:hover {
+            background: #1d4ed8;
+            transform: translateX(3px);
+        }
+
+
+        /* =========================
+           QUICK REVISION
+        ========================= */
+
+        .revision {
+            margin-top: 70px;
+
+            background:
+                linear-gradient(135deg, #172554, #1e40af);
+
+            color: white;
+
+            border-radius: 24px;
+
+            padding: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        .revision::after {
+            content: "C++";
+
+            position: absolute;
+
+            right: 25px;
+            bottom: -35px;
+
+            font-size: 130px;
+            font-weight: 900;
+
+            color: rgba(255,255,255,0.05);
+        }
+
+        .revision h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .revision p {
+            color: #bfdbfe;
+            max-width: 650px;
+        }
+
+        .revision-btn {
+            white-space: nowrap;
+
+            background: white;
+            color: #1d4ed8;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+            font-weight: 800;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #e2e8f0;
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #64748b;
+        }
+
+        footer strong {
+            color: #1d4ed8;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .hero-content {
+                padding: 65px 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                margin-top: -35px;
+            }
+
+            .days {
+                grid-template-columns: 1fr;
+            }
+
+            .revision {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                text-align: center;
+                width: 100%;
+            }
+
+            .container {
+                padding: 55px 15px;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .day-card {
+                padding: 23px;
+            }
+
+            .card-bottom {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .open-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                💻 C++17 • Complete Revision Hub
+            </span>
+
+            <h1>
+                Master C++<br>
+                <span>One Day at a Time.</span>
+            </h1>
+
+            <p class="hero-description">
+                Simple explanations, practical examples, important concepts,
+                lab practice and quick revision — organized day by day.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="day1.html" class="primary-btn">
+                    🚀 Start Day 1
+                </a>
+
+                <a href="#days" class="secondary-btn">
+                    View All Days ↓
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         STATS
+    ========================== -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <strong>04</strong>
+            <span>Study Days</span>
+        </div>
+
+        <div class="stat">
+            <strong>100+</strong>
+            <span>Concepts & Examples</span>
+        </div>
+
+        <div class="stat">
+            <strong>∞</strong>
+            <span>Practice Opportunities</span>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="container" id="days">
+
+
+        <div class="section-heading">
+
+            <small>Learning Path</small>
+
+            <h2>Choose Your Study Day</h2>
+
+            <p>
+                Follow the days in order or jump directly to the topic
+                you want to revise.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             DAY CARDS
+        ========================== -->
+
+        <div class="days">
+
+
+            <!-- DAY 1 -->
+
+            <article class="day-card">
+
+                <div class="card-top">
+
+                    <span class="day-label">
+                        DAY 01
+                    </span>
+
+                    <div class="day-icon">
+                        🧠
+                    </div>
+
+                </div>
+
+                <h3>C++ Fundamentals</h3>
+
+                <p>
+                    Build your foundation with C++ basics,
+                    operators, conditions, loops, arrays,
+                    functions, references and pointers.
+                </p>
+
+                <div class="topics">
+
+                    <span class="topic">Basics</span>
+                    <span class="topic">Operators</span>
+                    <span class="topic">Loops</span>
+                    <span class="topic">Arrays</span>
+                    <span class="topic">Functions</span>
+                    <span class="topic">Pointers</span>
+
+                </div>
+
+                <div class="card-bottom">
+
+                    <span class="progress-text">
+                        📖 Sessions 1–6
+                    </span>
+
+                    <a href="day1.html" class="open-btn">
+                        Open Day 1 →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DAY 2 -->
+
+            <article class="day-card">
+
+                <div class="card-top">
+
+                    <span class="day-label">
+                        DAY 02
+                    </span>
+
+                    <div class="day-icon">
+                        🏗️
+                    </div>
+
+                </div>
+
+                <h3>C++ Day 2</h3>
+
+                <p>
+                    Continue your C++ journey with the concepts,
+                    examples and practical exercises covered
+                    during Day 2.
+                </p>
+
+                <div class="topics">
+
+                    <span class="topic">Concepts</span>
+                    <span class="topic">Examples</span>
+                    <span class="topic">Practice</span>
+                    <span class="topic">Lab</span>
+
+                </div>
+
+                <div class="card-bottom">
+
+                    <span class="progress-text">
+                        📖 Day 2 Notes
+                    </span>
+
+                    <a href="day2.html" class="open-btn">
+                        Open Day 2 →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DAY 3 -->
+
+            <article class="day-card">
+
+                <div class="card-top">
+
+                    <span class="day-label">
+                        DAY 03
+                    </span>
+
+                    <div class="day-icon">
+                        ⚙️
+                    </div>
+
+                </div>
+
+                <h3>C++ Day 3</h3>
+
+                <p>
+                    Strengthen your understanding with Day 3
+                    concepts, examples, explanations and
+                    practical coding exercises.
+                </p>
+
+                <div class="topics">
+
+                    <span class="topic">Concepts</span>
+                    <span class="topic">Examples</span>
+                    <span class="topic">Coding</span>
+                    <span class="topic">Practice</span>
+
+                </div>
+
+                <div class="card-bottom">
+
+                    <span class="progress-text">
+                        📖 Day 3 Notes
+                    </span>
+
+                    <a href="day3.html" class="open-btn">
+                        Open Day 3 →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DAY 4 -->
+
+            <article class="day-card">
+
+                <div class="card-top">
+
+                    <span class="day-label">
+                        DAY 04
+                    </span>
+
+                    <div class="day-icon">
+                        🚀
+                    </div>
+
+                </div>
+
+                <h3>C++ Day 4</h3>
+
+                <p>
+                    Continue with advanced concepts, examples,
+                    explanations and practical exercises from
+                    your Day 4 study material.
+                </p>
+
+                <div class="topics">
+
+                    <span class="topic">Advanced</span>
+                    <span class="topic">Coding</span>
+                    <span class="topic">Practice</span>
+                    <span class="topic">Revision</span>
+
+                </div>
+
+                <div class="card-bottom">
+
+                    <span class="progress-text">
+                        📖 Day 4 Notes
+                    </span>
+
+                    <a href="day4.html" class="open-btn">
+                        Open Day 4 →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             QUICK REVISION
+        ========================== -->
+
+        <section class="revision">
+
+            <div>
+
+                <h2>⚡ Ready for Quick Revision?</h2>
+
+                <p>
+                    Start with Day 1 and build your C++ knowledge
+                    step by step. Revise concepts, understand examples
+                    and practice coding.
+                </p>
+
+            </div>
+
+            <a href="day1.html" class="revision-btn">
+                Start Learning →
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            📘 <strong>C++ Study Hub</strong>
+        </p>
+
+        <p>
+            Learn • Practice • Revise • Repeat
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

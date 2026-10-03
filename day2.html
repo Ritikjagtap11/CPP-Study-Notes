@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Day 2 — Complete Revision Notes</title><style>
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#5b667a;--primary:#1769e0;--primary2:#0d47a1;--border:#dce4ef;--code:#101827;--shadow:0 8px 25px rgba(23,32,51,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+header{background:linear-gradient(135deg,#0d47a1,#1976d2);color:white;padding:42px 20px}.hero{max-width:1100px;margin:auto}.hero h1{font-size:clamp(30px,5vw,48px);margin:0 0 8px}.hero p{margin:5px 0;color:#e5efff;font-size:17px}
+.container{max-width:1100px;margin:28px auto;padding:0 16px}.toc,section{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.toc{padding:20px}.toc h2{margin-top:0}.toc a{display:inline-block;margin:5px 8px 5px 0;color:var(--primary);text-decoration:none;font-weight:700}
+section{padding:26px;margin:22px 0}h2{color:var(--primary2);margin-top:0;border-bottom:2px solid #e8eef7;padding-bottom:8px}h3{color:#243b64;margin-top:24px}p{margin:9px 0}ul,ol{padding-left:24px}li{margin:5px 0}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini{border:1px solid var(--border);border-radius:12px;padding:16px;background:#fbfdff}.mini h3{margin-top:0}
+code{background:#eef2f7;padding:2px 6px;border-radius:5px}pre{background:var(--code);color:#e8eef8;padding:18px;border-radius:12px;overflow:auto;line-height:1.5;border:1px solid #263449}pre code{background:none;padding:0;color:inherit}
+table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}th{background:#edf4ff}
+.note,.tip,.warn,.exam{border-left:5px solid;padding:13px 16px;border-radius:9px;margin:15px 0}.note{background:#eaf4ff;border-color:#2980ef}.tip{background:#eaf8ef;border-color:#27a65b}.warn{background:#fff7df;border-color:#e2a500}.exam{background:#f1edff;border-color:#7656d6}
+details{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:10px 0;background:#fafcff}summary{cursor:pointer;font-weight:700}.badge{display:inline-block;padding:4px 9px;border-radius:20px;background:#e9f2ff;color:#1457b8;font-size:13px;font-weight:700;margin:3px}
+footer{text-align:center;color:var(--muted);padding:30px 15px}@media(max-width:700px){section{padding:19px}.container{padding:0 10px}pre{font-size:13px}th,td{font-size:14px}}
+</style></head>
+<body><header><div class="hero"><h1>C++ Day 2 — Complete Revision Notes</h1><p>Sessions 7–10 • OOP, Constructors, Inheritance & Polymorphism</p>
+<p><span class="badge">C++17</span><span class="badge">PGCP-AC August 2026</span><span class="badge">Easy Revision Notes</span></p>
+</div></header><div class="container"><nav class="toc"><h2>📚 Contents</h2><a href="#coverage">Coverage</a><a href="#oop">OOP</a><a href="#constructors">Constructors</a><a href="#copy">Copy Constructor</a><a href="#move">Move Semantics</a><a href="#static">Static & Const</a><a href="#inheritance">Inheritance</a><a href="#diamond">Virtual Base</a><a href="#friend">Friend</a><a href="#poly">Polymorphism</a><a href="#operators">Operator Overloading</a><a href="#lab">Lab Practice</a></nav>
+<section id="coverage"><h2>1. Official Coverage — Sessions 7–10</h2>
+<div class="cardgrid">
+<div class="mini"><h3>Sessions 7–8</h3><p>OOP, classes and objects, access specifiers, namespaces, constructors/destructors, parameterized and multiple constructors, dynamic initialization, copy constructor, move semantics, lvalue/rvalue, static and constant members.</p></div>
+<div class="mini"><h3>Session 9</h3><p>Single, multiple, multilevel, hierarchical and hybrid inheritance; virtual base class; constructors in derived classes; friend functions/classes.</p></div>
+<div class="mini"><h3>Session 10</h3><p>Polymorphism, function overloading, operator overloading, friend functions and constant functions. Lab includes overloaded operators <code>= == + ++ -- &lt;&lt; &gt;&gt; []</code>.</p></div>
+</div><div class="exam"><b>Revision rule:</b> Class → constructor → inheritance → polymorphism, then lab practice.</div></section>
+
+<section id="oop"><h2>2. OOP: Class, Object and Core Principles</h2>
+<p>A <b>class</b> is a blueprint. An <b>object</b> is an actual instance of a class.</p>
+<pre><code>class Student {
+public:
+    string name;
+    int marks;
+    void display() { cout &lt;&lt; name &lt;&lt; " " &lt;&lt; marks; }
+};
+
+int main() {
+    Student s1;
+    s1.name = "Ritik";
+    s1.marks = 90;
+    s1.display();
+}</code></pre>
+<div class="cardgrid"><div class="mini"><b>Encapsulation</b><p>Keep data and functions together.</p></div><div class="mini"><b>Abstraction</b><p>Show essential behavior and hide unnecessary details.</p></div><div class="mini"><b>Inheritance</b><p>Create a new class using an existing class.</p></div><div class="mini"><b>Polymorphism</b><p>One interface/name can represent different behavior.</p></div></div>
+<table><tr><th>Specifier</th><th>Meaning</th></tr><tr><td>public</td><td>Accessible from outside the class.</td></tr><tr><td>private</td><td>Accessible inside the class; default class access.</td></tr><tr><td>protected</td><td>Accessible inside the class and derived classes.</td></tr></table></section>
+
+<section id="constructors"><h2>3. Constructors and Destructors</h2>
+<p>A <b>constructor</b> runs when an object is initialized. A <b>destructor</b> runs when an object is destroyed.</p>
+<pre><code>class Student {
+    int marks;
+public:
+    Student() { marks = 0; cout &lt;&lt; "Constructor"; }
+    ~Student() { cout &lt;&lt; "Destructor"; }
+};</code></pre>
+<h3>Parameterized / Multiple Constructors</h3><pre><code>class Box {
+public:
+    Box() {}
+    Box(int x) {}
+    Box(int x, int y) {}
+};</code></pre>
+<p>Different parameter lists in constructors are constructor overloading.</p>
+<h3>Dynamic Initialization</h3><pre><code>int marks;
+cin &gt;&gt; marks;
+Student s(marks);</code></pre>
+<div class="exam"><b>MCQ:</b> Constructors have the same name as the class and no return type.</div></section>
+
+<section id="copy"><h2>4. Copy Constructor</h2>
+<p>A copy constructor creates a new object from an existing object.</p>
+<pre><code>class Student {
+    int marks;
+public:
+    Student(int m) : marks(m) {}
+    Student(const Student &amp;other) {
+        marks = other.marks;
+    }
+};
+Student s1(90);
+Student s2 = s1;</code></pre>
+<div class="note"><b>Think:</b> s2 is initialized using s1.</div></section>
+
+<section id="move"><h2>5. Move Semantics</h2>
+<p>An <b>lvalue</b> normally identifies an object with a persistent location. An <b>rvalue</b> is commonly a temporary value.</p>
+<pre><code>int x = 10;       // lvalue x
+int y = x + 5;    // x + 5 is a temporary value</code></pre>
+<p>A move constructor can transfer a resource from a movable source instead of making another resource copy.</p>
+<pre><code>class Buffer {
+    int* data;
+public:
+    Buffer(int value) { data = new int(value); }
+    Buffer(Buffer&amp;&amp; other) noexcept {
+        data = other.data;
+        other.data = nullptr;
+    }
+    ~Buffer() { delete data; }
+};</code></pre>
+<table><tr><th>Copy</th><th>Move</th></tr><tr><td>Copies state/resource.</td><td>Can transfer a resource from a movable source.</td></tr><tr><td>May require more work for resource-owning objects.</td><td>Can avoid unnecessary resource copying.</td></tr></table></section>
+
+<section id="static"><h2>6. Static and Constant Members</h2>
+<h3>Static Data Member</h3><pre><code>class Student {
+public:
+    static int count;
+    Student() { count++; }
+};
+int Student::count = 0;</code></pre>
+<h3>Static Member Function</h3><pre><code>class Demo {
+public:
+    static void show() { cout &lt;&lt; "Hello"; }
+};
+Demo::show();</code></pre>
+<h3>Constant Data / Const Member Function</h3><pre><code>class Student {
+    const int roll;
+public:
+    Student(int r) : roll(r) {}
+    void display() const { cout &lt;&lt; roll; }
+};</code></pre>
+<div class="exam"><b>Remember:</b> A const member function cannot modify the object's non-mutable state through that function.</div></section>
+
+<section id="inheritance"><h2>7. Inheritance</h2>
+<pre><code>class Animal {
+public:
+    void eat() { cout &lt;&lt; "Eating"; }
+};
+class Dog : public Animal {
+public:
+    void bark() { cout &lt;&lt; "Barking"; }
+};</code></pre>
+<table><tr><th>Type</th><th>Pattern</th></tr><tr><td>Single</td><td>A → B</td></tr><tr><td>Multilevel</td><td>A → B → C</td></tr><tr><td>Multiple</td><td>A + B → C</td></tr><tr><td>Hierarchical</td><td>A → B and A → C</td></tr><tr><td>Hybrid</td><td>Combination</td></tr></table>
+<h3>Derived Constructor Calling Base Constructor</h3><pre><code>class Base {
+public:
+    Base(int x) { cout &lt;&lt; x; }
+};
+class Derived : public Base {
+public:
+    Derived(int x) : Base(x) { cout &lt;&lt; " Derived"; }
+};</code></pre></section>
+
+<section id="diamond"><h2>8. Virtual Base Class / Diamond Problem</h2>
+<p>In a diamond, two intermediate classes inherit from the same base and a final class inherits from both. Without virtual inheritance, the final object can contain two base subobjects.</p>
+<pre><code>class A { public: int value; };
+class B : virtual public A {};
+class C : virtual public A {};
+class D : public B, public C {};</code></pre>
+<div class="note"><b>Why virtual?</b> It provides one shared base subobject for the common base in this diamond pattern.</div></section>
+
+<section id="friend"><h2>9. Friend Function and Friend Class</h2>
+<pre><code>class Box {
+    int value = 50;
+    friend void show(Box b);
+};
+void show(Box b) { cout &lt;&lt; b.value; }</code></pre>
+<p>A friend function is not a member function, but the class can grant it access to private/protected members.</p>
+<pre><code>class A {
+    int x = 10;
+    friend class B;
+};
+class B {
+public:
+    void show(A obj) { cout &lt;&lt; obj.x; }
+};</code></pre></section>
+
+<section id="poly"><h2>10. Polymorphism and Function Overloading</h2>
+<p>Polymorphism means one name/interface can represent different behavior.</p>
+<pre><code>class Calculator {
+public:
+    int add(int a, int b) { return a + b; }
+    double add(double a, double b) { return a + b; }
+};</code></pre>
+<div class="exam"><b>Remember:</b> Function overloading is compile-time polymorphism. Runtime polymorphism with virtual functions is Day 3.</div></section>
+
+<section id="operators"><h2>11. Operator Overloading</h2>
+<pre><code>class Point {
+public:
+    int x;
+    Point(int value) : x(value) {}
+
+    Point operator+(const Point&amp; other) {
+        return Point(x + other.x);
+    }
+};</code></pre>
+<table><tr><th>Operator</th><th>Lab purpose</th></tr><tr><td><code>=</code></td><td>Assignment</td></tr><tr><td><code>==</code></td><td>Comparison</td></tr><tr><td><code>+</code></td><td>Add objects</td></tr><tr><td><code>++</code>, <code>--</code></td><td>Increment/decrement</td></tr><tr><td><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td>Stream insertion/extraction</td></tr><tr><td><code>[]</code></td><td>Indexing</td></tr></table></section>
+
+<section id="lab"><h2>12. Day 2 Lab Practice</h2>
+<ol><li>Student class for students and sorting by roll number, date of birth or total marks.</li><li>Constructor/destructor programs.</li><li>Printer hierarchy using inheritance.</li><li>Multiple inheritance.</li><li>Friend function/class.</li><li>Date/Time class with function overloading.</li><li>Overload <code>=</code>, <code>==</code>, <code>+</code>, <code>++</code>, <code>--</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>[]</code>.</li></ol>
+<div class="tip"><b>Dry-run habit:</b> For constructor/inheritance questions, write object creation first and trace constructor calls.</div></section>
+
+<section><h2>13. Day 2 Fast Recall</h2><p><b>Class → Object → Access → Namespace → Constructor → Destructor → Copy → Move → Static/Const → Inheritance → Virtual Base → Friend → Function Overloading → Operator Overloading</b></p></section>
+</div><footer>C++17 • PGCP-AC August 2026 • Revision Notes</footer></body></html>

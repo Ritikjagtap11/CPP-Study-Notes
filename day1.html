@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Day 1 Complete Revision Notes</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;line-height:1.55}
+  header{background:linear-gradient(135deg,#172554,#2563eb);color:white;padding:42px 20px}
+  .container{max-width:1100px;margin:auto}
+  h1{margin:0 0 8px;font-size:36px}
+  h2{margin-top:0;color:#173b8f}
+  h3{color:#1e40af;margin-bottom:8px}
+  .subtitle{font-size:17px;opacity:.92}
+  .progress{margin-top:20px;background:rgba(255,255,255,.2);border-radius:10px;padding:12px}
+  section{background:white;margin:22px auto;padding:26px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.07)}
+  .tag{display:inline-block;background:#dbeafe;color:#1e40af;padding:5px 10px;border-radius:20px;font-size:13px;font-weight:bold;margin:3px}
+  .note{background:#eff6ff;border-left:5px solid #2563eb;padding:12px 15px;border-radius:8px;margin:12px 0}
+  .tip{background:#ecfdf5;border-left:5px solid #059669;padding:12px 15px;border-radius:8px;margin:12px 0}
+  .warn{background:#fff7ed;border-left:5px solid #ea580c;padding:12px 15px;border-radius:8px;margin:12px 0}
+  code{font-family:Consolas,monospace}
+  pre{background:#111827;color:#e5e7eb;padding:17px;border-radius:10px;overflow:auto;font-size:14px}
+  .inline{background:#eef2ff;padding:2px 6px;border-radius:5px}
+  table{width:100%;border-collapse:collapse;margin:14px 0}
+  th,td{border:1px solid #dbe2ea;padding:10px;text-align:left;vertical-align:top}
+  th{background:#eaf0ff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .card{border:1px solid #dbe2ea;border-radius:12px;padding:16px;background:#fafcff}
+  .small{font-size:14px;color:#526174}
+  .question{background:#f8fafc;border:1px solid #dbe2ea;padding:14px;border-radius:10px;margin:10px 0}
+  details{margin:10px 0}
+  summary{cursor:pointer;font-weight:bold;color:#1e40af}
+  footer{text-align:center;padding:30px;color:#64748b}
+  @media(max-width:650px){h1{font-size:28px}section{padding:18px}pre{font-size:12px}}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <h1>📘 C++ Day 1 — Complete Revision Notes</h1>
+    <div class="subtitle">Sessions 1–6 • Easy language • Explanation + Syntax + Examples + Lab Practice</div>
+    <div class="progress"><b>Day 1 Flow:</b> C++ Basics → Tokens → Operators → Conditions → Loops → Arrays → Functions → Memory → Pointers → Smart Pointers</div>
+  </div>
+</header>
+
+<main class="container">
+
+<section>
+  <h2>🎯 What is covered today?</h2>
+  <div class="grid">
+    <div class="card"><b>Session 1</b><br>C++ introduction, history, C vs C++, features, program structure, C++17</div>
+    <div class="card"><b>Session 2</b><br>Tokens, initialization, expressions, operators, basic programs</div>
+    <div class="card"><b>Session 3</b><br>if/else, switch, loops, break/continue/return, arrays, command-line arguments</div>
+    <div class="card"><b>Session 4</b><br>Functions, prototypes, reference parameters, inline, math library</div>
+    <div class="card"><b>Sessions 5–6</b><br>Memory, pointers, arrays with pointers, enum, type aliases, new/delete, object pointers, this, smart pointers</div>
+  </div>
+</section>
+
+<section>
+<h2>1️⃣ Session 1 — Getting Started with C++</h2>
+
+<h3>What is C++?</h3>
+<p>C++ is a general-purpose programming language that supports procedural programming and Object-Oriented Programming (OOP). It was developed from the C language and adds features such as classes, objects, inheritance and polymorphism.</p>
+
+<div class="note"><b>Easy idea:</b> C++ = C-style programming + Object-Oriented Programming + many modern features.</div>
+
+<h3>Short history</h3>
+<ul>
+<li>C++ was developed by <b>Bjarne Stroustrup</b>.</li>
+<li>It started as an extension of C and was originally associated with the name “C with Classes”.</li>
+<li>Modern C++ has standardized versions such as C++11, C++14, C++17, C++20 and later.</li>
+</ul>
+
+<h3>C vs C++</h3>
+<table>
+<tr><th>C</th><th>C++</th></tr>
+<tr><td>Primarily procedural</td><td>Supports procedural + OOP</td></tr>
+<tr><td>Uses structures mainly for data</td><td>Has classes and objects</td></tr>
+<tr><td>No function/operator overloading</td><td>Supports function/operator overloading</td></tr>
+<tr><td>No references</td><td>Supports references</td></tr>
+<tr><td>Uses <code>malloc/free</code></td><td>Also provides <code>new/delete</code></td></tr>
+</table>
+
+<h3>Important C++ features</h3>
+<div class="grid">
+<div class="card"><b>OOP</b><br>Classes, objects, inheritance, polymorphism.</div>
+<div class="card"><b>Function Overloading</b><br>Same function name with different parameters.</div>
+<div class="card"><b>References</b><br>Another name (alias) for an existing variable.</div>
+<div class="card"><b>Templates</b><br>Generic programming. More detailed later.</div>
+<div class="card"><b>STL</b><br>Standard Template Library containers and algorithms.</div>
+<div class="card"><b>Memory Control</b><br>Pointers and dynamic memory using new/delete.</div>
+</div>
+
+<h3>Basic C++ program structure</h3>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; "Hello World";
+    return 0;
+}</code></pre>
+
+<p><b>Line by line:</b></p>
+<ul>
+<li><code>#include &lt;iostream&gt;</code> → gives input/output facilities such as <code>cout</code>.</li>
+<li><code>using namespace std;</code> → allows writing <code>cout</code> instead of <code>std::cout</code>.</li>
+<li><code>int main()</code> → program execution starts here.</li>
+<li><code>cout</code> → prints output.</li>
+<li><code>return 0;</code> → indicates successful completion.</li>
+</ul>
+
+<h3>C++17</h3>
+<p>The course uses <b>C++17</b> as the standard. C++17 is a version of the C++ language standard that added several modern language/library features.</p>
+
+<div class="tip"><b>Exam memory:</b> Know the basic program structure and the purpose of <code>#include</code>, <code>main()</code>, <code>cout</code>, and <code>return 0</code>.</div>
+</section>
+
+<section>
+<h2>2️⃣ Session 2 — Tokens, Initialization, Expressions & Operators</h2>
+
+<h3>What is a token?</h3>
+<p>A <b>token</b> is a smallest meaningful unit of a C++ program.</p>
+<table>
+<tr><th>Token type</th><th>Example</th></tr>
+<tr><td>Keyword</td><td><code>int</code>, <code>if</code>, <code>return</code></td></tr>
+<tr><td>Identifier</td><td><code>marks</code>, <code>total</code></td></tr>
+<tr><td>Literal</td><td><code>10</code>, <code>3.14</code>, <code>'A'</code></td></tr>
+<tr><td>Operator</td><td><code>+</code>, <code>==</code>, <code>&amp;&amp;</code></td></tr>
+<tr><td>Separator / punctuation</td><td><code>;</code>, <code>,</code>, <code>()</code>, <code>{}</code></td></tr>
+</table>
+
+<h3>Initialization</h3>
+<p>Initialization means giving a variable its initial value when it is created.</p>
+<pre><code>int a = 10;
+double price{99.50};
+char grade = 'A';
+bool pass = true;</code></pre>
+
+<p>Common C++ initialization forms:</p>
+<pre><code>int a = 10;     // copy initialization
+int b(20);      // direct initialization
+int c{30};      // brace/list initialization</code></pre>
+
+<div class="warn"><b>Remember:</b> <code>int x;</code> creates a local variable without giving it a useful initial value. Prefer initializing variables explicitly.</div>
+
+<h3>Expression</h3>
+<p>An expression combines values, variables and operators to produce a result.</p>
+<pre><code>int a = 10;
+int b = 20;
+int sum = a + b;       // a + b is an expression</code></pre>
+
+<h3>Operators</h3>
+<table>
+<tr><th>Type</th><th>Operators</th><th>Example</th></tr>
+<tr><td>Arithmetic</td><td><code>+ - * / %</code></td><td><code>a + b</code></td></tr>
+<tr><td>Relational</td><td><code>== != &gt; &lt; &gt;= &lt;=</code></td><td><code>a &gt; b</code></td></tr>
+<tr><td>Logical</td><td><code>&amp;&amp; || !</code></td><td><code>age &gt;= 18 &amp;&amp; citizen</code></td></tr>
+<tr><td>Unary</td><td><code>++ -- + - !</code></td><td><code>++a</code></td></tr>
+<tr><td>Ternary</td><td><code>? :</code></td><td><code>max = a &gt; b ? a : b;</code></td></tr>
+<tr><td>Assignment</td><td><code>= += -= *= /= %=</code></td><td><code>a += 5;</code></td></tr>
+</table>
+
+<h3>Arithmetic example</h3>
+<pre><code>int a = 10;
+int b = 3;
+
+cout &lt;&lt; a + b &lt;&lt; endl;  // 13
+cout &lt;&lt; a - b &lt;&lt; endl;  // 7
+cout &lt;&lt; a * b &lt;&lt; endl;  // 30
+cout &lt;&lt; a / b &lt;&lt; endl;  // 3 (integer division)
+cout &lt;&lt; a % b &lt;&lt; endl;  // 1</code></pre>
+
+<div class="note"><b>Important:</b> With two integers, <code>10 / 3</code> gives <b>3</b>, not 3.333... because integer division removes the fractional part.</div>
+
+<h3>Relational + logical example</h3>
+<pre><code>int age = 20;
+bool hasId = true;
+
+if (age &gt;= 18 &amp;&amp; hasId)
+    cout &lt;&lt; "Allowed";</code></pre>
+
+<h3>Ternary operator</h3>
+<pre><code>int a = 15;
+int b = 20;
+
+int max = (a &gt; b) ? a : b;</code></pre>
+<p>Meaning: if <code>a &gt; b</code> is true, choose <code>a</code>; otherwise choose <code>b</code>.</p>
+
+<h3>Compound assignment</h3>
+<pre><code>int x = 10;
+
+x += 5;  // x = x + 5 → 15
+x -= 3;  // x = x - 3 → 12
+x *= 2;  // x = x * 2 → 24</code></pre>
+</section>
+
+<section>
+<h2>3️⃣ Session 3 — Conditions, Loops, Jumps & Arrays</h2>
+
+<h3>if</h3>
+<pre><code>int marks = 75;
+
+if (marks &gt;= 40)
+    cout &lt;&lt; "Pass";</code></pre>
+
+<h3>if-else</h3>
+<pre><code>if (marks &gt;= 40)
+    cout &lt;&lt; "Pass";
+else
+    cout &lt;&lt; "Fail";</code></pre>
+
+<h3>else-if ladder</h3>
+<pre><code>if (marks &gt;= 75)
+    cout &lt;&lt; "Distinction";
+else if (marks &gt;= 40)
+    cout &lt;&lt; "Pass";
+else
+    cout &lt;&lt; "Fail";</code></pre>
+
+<h3>switch</h3>
+<p>Use <code>switch</code> when one expression needs to be compared against several fixed cases.</p>
+<pre><code>int choice = 2;
+
+switch (choice)
+{
+    case 1:
+        cout &lt;&lt; "Add";
+        break;
+
+    case 2:
+        cout &lt;&lt; "Delete";
+        break;
+
+    default:
+        cout &lt;&lt; "Invalid choice";
+}</code></pre>
+
+<div class="warn"><b>Why break?</b> Without <code>break</code>, execution can continue into the next case (fall-through).</div>
+
+<h3>for loop</h3>
+<pre><code>for (int i = 1; i &lt;= 5; i++)
+{
+    cout &lt;&lt; i &lt;&lt; " ";
+}</code></pre>
+<p>Output: <code>1 2 3 4 5</code></p>
+
+<h3>while loop</h3>
+<pre><code>int i = 1;
+
+while (i &lt;= 5)
+{
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+}</code></pre>
+
+<h3>do-while loop</h3>
+<pre><code>int i = 1;
+
+do
+{
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+}
+while (i &lt;= 5);</code></pre>
+
+<div class="note"><b>Key difference:</b> <code>do-while</code> executes its body at least once because the condition is checked after the body.</div>
+
+<h3>break, continue, return</h3>
+<pre><code>for (int i = 1; i &lt;= 5; i++)
+{
+    if (i == 3)
+        continue;     // skip 3
+
+    if (i == 5)
+        break;        // stop loop
+
+    cout &lt;&lt; i &lt;&lt; " ";
+}</code></pre>
+
+<ul>
+<li><b>break</b> → immediately exits the loop/switch.</li>
+<li><b>continue</b> → skips the current loop iteration.</li>
+<li><b>return</b> → exits the function and can return a value.</li>
+</ul>
+
+<h3>1-D Array</h3>
+<p>An array stores multiple values of the same type in contiguous memory locations.</p>
+<pre><code>int marks[5] = {10, 20, 30, 40, 50};
+
+cout &lt;&lt; marks[0]; // 10
+cout &lt;&lt; marks[4]; // 50</code></pre>
+
+<div class="note"><b>Index starts from 0.</b> For an array of size 5, valid indexes are 0, 1, 2, 3, 4.</div>
+
+<h3>Loop through an array</h3>
+<pre><code>int arr[5] = {10, 20, 30, 40, 50};
+
+for (int i = 0; i &lt; 5; i++)
+{
+    cout &lt;&lt; arr[i] &lt;&lt; " ";
+}</code></pre>
+
+<h3>2-D Array</h3>
+<p>A 2-D array can be visualized like rows and columns.</p>
+<pre><code>int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+cout &lt;&lt; matrix[1][2]; // 6</code></pre>
+
+<h3>2-D array traversal</h3>
+<pre><code>for (int i = 0; i &lt; 2; i++)
+{
+    for (int j = 0; j &lt; 3; j++)
+    {
+        cout &lt;&lt; matrix[i][j] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}</code></pre>
+
+<h3>Command-line arguments</h3>
+<p>C++ can receive values from the command line using <code>argc</code> and <code>argv</code>.</p>
+<pre><code>int main(int argc, char* argv[])
+{
+    cout &lt;&lt; "Argument count: " &lt;&lt; argc &lt;&lt; endl;
+
+    for (int i = 0; i &lt; argc; i++)
+        cout &lt;&lt; argv[i] &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+<ul>
+<li><code>argc</code> → number of command-line arguments.</li>
+<li><code>argv</code> → array containing the argument strings.</li>
+</ul>
+</section>
+
+<section>
+<h2>4️⃣ Session 4 — Functions</h2>
+
+<h3>What is a function?</h3>
+<p>A function is a reusable block of code designed to perform a specific task.</p>
+
+<pre><code>int add(int a, int b)
+{
+    return a + b;
+}
+
+int main()
+{
+    cout &lt;&lt; add(10, 20);
+}</code></pre>
+
+<h3>Why use functions?</h3>
+<ul>
+<li>Code reuse</li>
+<li>Less repetition</li>
+<li>Easier testing and debugging</li>
+<li>Breaks a large program into smaller tasks</li>
+</ul>
+
+<h3>Function parts</h3>
+<pre><code>int add(int a, int b)
+{
+    return a + b;
+}</code></pre>
+<ul>
+<li><code>int</code> → return type</li>
+<li><code>add</code> → function name</li>
+<li><code>int a, int b</code> → parameters</li>
+<li><code>return a + b</code> → returned result</li>
+</ul>
+
+<h3>Function prototype</h3>
+<p>A prototype tells the compiler about a function before the function is used.</p>
+<pre><code>int add(int, int);  // prototype
+
+int main()
+{
+    cout &lt;&lt; add(2, 3);
+}
+
+int add(int a, int b)
+{
+    return a + b;
+}</code></pre>
+
+<h3>Common function forms</h3>
+<table>
+<tr><th>Form</th><th>Example</th></tr>
+<tr><td>No argument, no return</td><td><code>void show()</code></td></tr>
+<tr><td>Argument, no return</td><td><code>void show(int x)</code></td></tr>
+<tr><td>No argument, return</td><td><code>int getNumber()</code></td></tr>
+<tr><td>Argument + return</td><td><code>int add(int a, int b)</code></td></tr>
+</table>
+
+<h3>Call by reference</h3>
+<p>A reference parameter lets a function work with the original variable instead of making a separate copy.</p>
+<pre><code>void swap(int &amp;a, int &amp;b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main()
+{
+    int x = 10, y = 20;
+
+    swap(x, y);
+
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y;
+}</code></pre>
+
+<p>Output: <code>20 10</code></p>
+
+<div class="tip"><b>Easy memory:</b> <code>int &amp;a</code> means <b>a is a reference/alias</b> to the original variable.</div>
+
+<h3>inline function</h3>
+<p><code>inline</code> suggests that the compiler may replace a small function call with the function body. It is generally used for small functions.</p>
+<pre><code>inline int square(int x)
+{
+    return x * x;
+}
+
+cout &lt;&lt; square(5);</code></pre>
+
+<h3>Math library</h3>
+<p>Mathematical functions are available through the appropriate standard library facilities, commonly using <code>&lt;cmath&gt;</code>.</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; sqrt(25) &lt;&lt; endl;  // 5
+    cout &lt;&lt; pow(2, 3) &lt;&lt; endl; // 8
+    return 0;
+}</code></pre>
+</section>
+
+<section>
+<h2>5️⃣ Sessions 5–6 — Memory Management & Pointers</h2>
+
+<h3>Memory basics</h3>
+<p>When a program runs, variables and objects need memory. A pointer stores the address of another object or variable.</p>
+
+<div class="grid">
+<div class="card"><b>Variable</b><br>Stores a value.<br><code>int x = 10;</code></div>
+<div class="card"><b>Address</b><br>Location of the variable in memory.<br><code>&amp;x</code></div>
+<div class="card"><b>Pointer</b><br>Stores an address.<br><code>int *p = &amp;x;</code></div>
+<div class="card"><b>Dereference</b><br>Gets the value at the stored address.<br><code>*p</code></div>
+</div>
+
+<h3>Pointer example</h3>
+<pre><code>int x = 10;
+
+int *p = &amp;x;
+
+cout &lt;&lt; x &lt;&lt; endl;   // 10
+cout &lt;&lt; &amp;x &lt;&lt; endl;  // address
+cout &lt;&lt; p &lt;&lt; endl;   // same address
+cout &lt;&lt; *p &lt;&lt; endl;  // 10</code></pre>
+
+<div class="note"><b>Remember:</b><br>
+<code>&amp;x</code> = address of x<br>
+<code>p</code> = address stored in p<br>
+<code>*p</code> = value at that address
+</div>
+
+<h3>Changing a value using a pointer</h3>
+<pre><code>int x = 10;
+int *p = &amp;x;
+
+*p = 50;
+
+cout &lt;&lt; x; // 50</code></pre>
+
+<p>Why? <code>p</code> points to <code>x</code>, so changing <code>*p</code> changes <code>x</code>.</p>
+
+<h3>Pointer and array</h3>
+<p>The name of an array can be used in expressions related to the address of its first element.</p>
+<pre><code>int arr[3] = {10, 20, 30};
+
+int *p = arr;
+
+cout &lt;&lt; *p &lt;&lt; endl;       // 10
+cout &lt;&lt; *(p + 1) &lt;&lt; endl; // 20
+cout &lt;&lt; *(p + 2) &lt;&lt; endl; // 30</code></pre>
+
+<h3>Array traversal using pointer</h3>
+<pre><code>int arr[5] = {10, 20, 30, 40, 50};
+
+int *p = arr;
+
+for (int i = 0; i &lt; 5; i++)
+{
+    cout &lt;&lt; *(p + i) &lt;&lt; " ";
+}</code></pre>
+
+<h3>Array of pointers</h3>
+<p>An array can contain pointer variables.</p>
+<pre><code>int a = 10;
+int b = 20;
+int c = 30;
+
+int *ptrs[3] = {&amp;a, &amp;b, &amp;c};
+
+cout &lt;&lt; *ptrs[0] &lt;&lt; endl; // 10
+cout &lt;&lt; *ptrs[1] &lt;&lt; endl; // 20</code></pre>
+
+<h3>Passing pointer to a function</h3>
+<pre><code>void change(int *p)
+{
+    *p = 100;
+}
+
+int main()
+{
+    int x = 10;
+
+    change(&amp;x);
+
+    cout &lt;&lt; x; // 100
+}</code></pre>
+
+<h3>enum</h3>
+<p>An <code>enum</code> defines a set of named constants.</p>
+<pre><code>enum Day
+{
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY
+};
+
+Day today = TUESDAY;</code></pre>
+
+<div class="note"><b>Easy idea:</b> Instead of remembering arbitrary numeric values, you can use meaningful names.</div>
+
+<h3>typedef / type alias</h3>
+<p>A type alias gives another name to an existing type.</p>
+<pre><code>typedef unsigned int uint;
+
+uint age = 25;</code></pre>
+
+<p>Modern C++ also supports <code>using</code>:</p>
+<pre><code>using uint = unsigned int;
+
+uint age = 25;</code></pre>
+
+<h3>Dynamic memory — new</h3>
+<p><code>new</code> dynamically allocates memory.</p>
+<pre><code>int *p = new int;
+
+*p = 50;
+
+cout &lt;&lt; *p;</code></pre>
+
+<p>You can also initialize directly:</p>
+<pre><code>int *p = new int(50);</code></pre>
+
+<h3>delete</h3>
+<p>Memory allocated using <code>new</code> should be released with <code>delete</code>.</p>
+<pre><code>int *p = new int(50);
+
+cout &lt;&lt; *p;
+
+delete p;
+p = nullptr;</code></pre>
+
+<div class="warn"><b>Exam concept:</b> <code>new</code> allocates dynamic memory; <code>delete</code> releases memory allocated for one object. For an array allocated with <code>new[]</code>, use <code>delete[]</code>.</div>
+
+<h3>Dynamic array</h3>
+<pre><code>int n = 5;
+
+int *arr = new int[n];
+
+for (int i = 0; i &lt; n; i++)
+    arr[i] = i + 1;
+
+delete[] arr;
+arr = nullptr;</code></pre>
+
+<h3>Pointer to an object</h3>
+<p>A pointer can point to an object of a class.</p>
+<pre><code>class Student
+{
+public:
+    int marks;
+
+    void show()
+    {
+        cout &lt;&lt; marks;
+    }
+};
+
+int main()
+{
+    Student s;
+    s.marks = 90;
+
+    Student *p = &amp;s;
+
+    p-&gt;show();
+}</code></pre>
+
+<div class="note"><b>Important:</b> When using a pointer to an object, <code>-&gt;</code> is used to access members through the pointer. <code>p-&gt;marks</code> is equivalent to <code>(*p).marks</code>.</div>
+
+<h3>this pointer</h3>
+<p>Inside a non-static member function, <code>this</code> points to the current object.</p>
+<pre><code>class Student
+{
+    int marks;
+
+public:
+    void setMarks(int marks)
+    {
+        this-&gt;marks = marks;
+    }
+
+    void show()
+    {
+        cout &lt;&lt; this-&gt;marks;
+    }
+};
+
+int main()
+{
+    Student s;
+    s.setMarks(90);
+    s.show();
+}</code></pre>
+
+<p>Here both the parameter and data member are named <code>marks</code>. <code>this-&gt;marks</code> means the current object's member.</p>
+
+<h3>Smart pointers</h3>
+<p>Smart pointers help manage dynamically allocated objects automatically using ownership rules.</p>
+
+<h3>unique_ptr</h3>
+<p><code>unique_ptr</code> represents exclusive ownership. It should not have two independent owners of the same object.</p>
+<pre><code>#include &lt;memory&gt;
+
+std::unique_ptr&lt;int&gt; p = std::make_unique&lt;int&gt;(50);
+
+cout &lt;&lt; *p;</code></pre>
+
+<div class="note"><b>Easy idea:</b> unique_ptr = <b>one owner</b>.</div>
+
+<h3>shared_ptr</h3>
+<p><code>shared_ptr</code> allows multiple smart pointers to share ownership of the same object.</p>
+<pre><code>#include &lt;memory&gt;
+
+std::shared_ptr&lt;int&gt; p1 = std::make_shared&lt;int&gt;(50);
+std::shared_ptr&lt;int&gt; p2 = p1;
+
+cout &lt;&lt; *p1 &lt;&lt; endl;
+cout &lt;&lt; *p2 &lt;&lt; endl;</code></pre>
+
+<div class="note"><b>Easy idea:</b> shared_ptr = <b>shared ownership</b>.</div>
+
+<h3>weak_ptr</h3>
+<p><code>weak_ptr</code> observes an object managed by <code>shared_ptr</code> without owning it.</p>
+<pre><code>#include &lt;memory&gt;
+
+std::shared_ptr&lt;int&gt; p1 = std::make_shared&lt;int&gt;(50);
+std::weak_ptr&lt;int&gt; p2 = p1;
+
+if (auto temp = p2.lock())
+{
+    cout &lt;&lt; *temp;
+}</code></pre>
+
+<div class="note"><b>Easy memory:</b><br>
+unique_ptr → one owner<br>
+shared_ptr → multiple owners<br>
+weak_ptr → observer, does not own
+</div>
+</section>
+
+<section>
+<h2>6️⃣ Day 1 Lab Practice</h2>
+<p>The Day 1 syllabus includes practical exercises around basic output/input, arithmetic, control structures, arrays, command-line arguments, functions, references and pointers.</p>
+
+<div class="grid">
+<div class="card"><b>1. Hello World</b><br>Print a simple message using <code>cout</code>.</div>
+<div class="card"><b>2. Add Numbers</b><br>Read two numbers and print their sum.</div>
+<div class="card"><b>3. Binary / Character</b><br>Practice input, output and basic data types.</div>
+<div class="card"><b>4. Compound Interest</b><br>Use variables, arithmetic operators and formula.</div>
+<div class="card"><b>5. Power</b><br>Use arithmetic/math functionality.</div>
+<div class="card"><b>6. Swap</b><br>Practice temporary variable and reference-based swapping.</div>
+<div class="card"><b>7. Rectangle Area</b><br>Use function/variables and arithmetic.</div>
+<div class="card"><b>8. Control Structures</b><br>Practice if, switch and loops.</div>
+<div class="card"><b>9. Arrays</b><br>Practice 1-D and 2-D arrays.</div>
+<div class="card"><b>10. Command-line Args</b><br>Practice <code>argc</code> and <code>argv</code>.</div>
+<div class="card"><b>11. Functions</b><br>Practice prototype, arguments, return and reference.</div>
+<div class="card"><b>12. Pointers</b><br>Practice address, dereference, arrays and pointer parameters.</div>
+<div class="card"><b>13. Pointer Strings</b><br>Practice string comparison, concatenation, copying and length using pointer-based techniques.</div>
+</div>
+
+<h3>Example: Swap using reference</h3>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+void swapNumbers(int &amp;a, int &amp;b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main()
+{
+    int x = 10, y = 20;
+
+    cout &lt;&lt; "Before: " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+
+    swapNumbers(x, y);
+
+    cout &lt;&lt; "After: " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+<h3>Example: Rectangle area using function</h3>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+double area(double length, double width)
+{
+    return length * width;
+}
+
+int main()
+{
+    double l = 10;
+    double w = 5;
+
+    cout &lt;&lt; "Area = " &lt;&lt; area(l, w);
+
+    return 0;
+}</code></pre>
+</section>
+
+<section>
+<h2>🧠 Day 1 — Important Differences</h2>
+
+<table>
+<tr><th>Concept</th><th>Remember</th></tr>
+<tr><td><code>&amp;x</code></td><td>Address of x</td></tr>
+<tr><td><code>*p</code></td><td>Value at the address stored in p</td></tr>
+<tr><td><code>p</code></td><td>The address stored by pointer p</td></tr>
+<tr><td><code>break</code></td><td>Exit loop/switch</td></tr>
+<tr><td><code>continue</code></td><td>Skip current iteration</td></tr>
+<tr><td><code>return</code></td><td>Exit function</td></tr>
+<tr><td><code>for</code></td><td>Good when iteration structure is known</td></tr>
+<tr><td><code>while</code></td><td>Condition checked before body</td></tr>
+<tr><td><code>do-while</code></td><td>Body runs at least once</td></tr>
+<tr><td>Reference</td><td>Alias for an existing object/variable</td></tr>
+<tr><td>Pointer</td><td>Stores an address</td></tr>
+<tr><td><code>new</code></td><td>Dynamic allocation</td></tr>
+<tr><td><code>delete</code></td><td>Releases single dynamically allocated object</td></tr>
+<tr><td><code>delete[]</code></td><td>Releases dynamically allocated array</td></tr>
+<tr><td><code>unique_ptr</code></td><td>Exclusive ownership</td></tr>
+<tr><td><code>shared_ptr</code></td><td>Shared ownership</td></tr>
+<tr><td><code>weak_ptr</code></td><td>Non-owning observer</td></tr>
+<tr><td><code>p-&gt;member</code></td><td>Access object member through pointer</td></tr>
+<tr><td><code>this</code></td><td>Pointer to current object</td></tr>
+</table>
+</section>
+
+<section>
+<h2>⚡ Day 1 Fast Recall</h2>
+<div class="note" style="font-size:17px">
+<b>Token → Initialization → Expression → Operator → Condition → Loop → Array → Function → Reference → Address (&amp;) → Pointer (*) → new/delete → Object Pointer → this → Smart Pointer</b>
+</div>
+
+<h3>Pointer dry run</h3>
+<pre><code>int x = 10;
+int *p = &amp;x;
+
+*p = 25;</code></pre>
+
+<table>
+<tr><th>Step</th><th>x</th><th>p</th><th>*p</th></tr>
+<tr><td>1. Create x</td><td>10</td><td>—</td><td>—</td></tr>
+<tr><td>2. p = &amp;x</td><td>10</td><td>address of x</td><td>10</td></tr>
+<tr><td>3. *p = 25</td><td>25</td><td>address of x</td><td>25</td></tr>
+</table>
+
+<div class="tip"><b>Final exam trick:</b> If you see <code>&amp;</code> in front of a variable, think “address”. If you see <code>*</code> on a pointer, think “value stored at that address”.</div>
+</section>
+
+<section>
+<h2>📝 Quick Self-Test</h2>
+
+<div class="question"><b>Q1.</b> What is the starting point of a normal C++ program?<br>
+<details><summary>Show answer</summary><p><code>main()</code></p></details></div>
+
+<div class="question"><b>Q2.</b> What does <code>&amp;x</code> give?<br>
+<details><summary>Show answer</summary><p>The address of <code>x</code>.</p></details></div>
+
+<div class="question"><b>Q3.</b> What does <code>*p</code> mean when p is a pointer?<br>
+<details><summary>Show answer</summary><p>The value stored at the address held by <code>p</code>.</p></details></div>
+
+<div class="question"><b>Q4.</b> Which loop always executes at least once?<br>
+<details><summary>Show answer</summary><p><code>do-while</code></p></details></div>
+
+<div class="question"><b>Q5.</b> Which keyword is used for dynamic allocation?<br>
+<details><summary>Show answer</summary><p><code>new</code></p></details></div>
+
+<div class="question"><b>Q6.</b> Which smart pointer represents exclusive ownership?<br>
+<details><summary>Show answer</summary><p><code>unique_ptr</code></p></details></div>
+
+<div class="question"><b>Q7.</b> Which operator is commonly used to access a member through an object pointer?<br>
+<details><summary>Show answer</summary><p><code>-&gt;</code></p></details></div>
+</section>
+
+<section>
+<h2>✅ Day 1 Completion Checklist</h2>
+<label><input type="checkbox"> C++ history, features and C vs C++</label><br>
+<label><input type="checkbox"> Basic C++ program structure and C++17</label><br>
+<label><input type="checkbox"> Tokens and initialization</label><br>
+<label><input type="checkbox"> Expressions and all Day 1 operators</label><br>
+<label><input type="checkbox"> if / else-if / else / switch</label><br>
+<label><input type="checkbox"> for / while / do-while</label><br>
+<label><input type="checkbox"> break / continue / return</label><br>
+<label><input type="checkbox"> 1-D and 2-D arrays</label><br>
+<label><input type="checkbox"> Command-line arguments</label><br>
+<label><input type="checkbox"> Function forms and prototypes</label><br>
+<label><input type="checkbox"> Call by reference</label><br>
+<label><input type="checkbox"> inline functions and math library</label><br>
+<label><input type="checkbox"> Memory and pointers</label><br>
+<label><input type="checkbox"> Arrays using pointers</label><br>
+<label><input type="checkbox"> enum and typedef/type aliases</label><br>
+<label><input type="checkbox"> new / delete / delete[]</label><br>
+<label><input type="checkbox"> Pointer to object and this pointer</label><br>
+<label><input type="checkbox"> unique_ptr / shared_ptr / weak_ptr</label><br>
+<label><input type="checkbox"> All Day 1 lab programs</label>
+</section>
+
+</main>
+
+<footer>
+  C++ Day 1 Revision • Sessions 1–6 • Keep this page open while practicing code.
+</footer>
+</body>
+</html>

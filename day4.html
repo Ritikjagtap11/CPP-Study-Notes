@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Day 4 — Final Revision & Mock</title><style>
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#5b667a;--primary:#1769e0;--primary2:#0d47a1;--border:#dce4ef;--code:#101827;--shadow:0 8px 25px rgba(23,32,51,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+header{background:linear-gradient(135deg,#0d47a1,#1976d2);color:white;padding:42px 20px}.hero{max-width:1100px;margin:auto}.hero h1{font-size:clamp(30px,5vw,48px);margin:0 0 8px}.hero p{margin:5px 0;color:#e5efff;font-size:17px}
+.container{max-width:1100px;margin:28px auto;padding:0 16px}.toc,section{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.toc{padding:20px}.toc h2{margin-top:0}.toc a{display:inline-block;margin:5px 8px 5px 0;color:var(--primary);text-decoration:none;font-weight:700}
+section{padding:26px;margin:22px 0}h2{color:var(--primary2);margin-top:0;border-bottom:2px solid #e8eef7;padding-bottom:8px}h3{color:#243b64;margin-top:24px}p{margin:9px 0}ul,ol{padding-left:24px}li{margin:5px 0}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini{border:1px solid var(--border);border-radius:12px;padding:16px;background:#fbfdff}.mini h3{margin-top:0}
+code{background:#eef2f7;padding:2px 6px;border-radius:5px}pre{background:var(--code);color:#e8eef8;padding:18px;border-radius:12px;overflow:auto;line-height:1.5;border:1px solid #263449}pre code{background:none;padding:0;color:inherit}
+table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}th{background:#edf4ff}
+.note,.tip,.warn,.exam{border-left:5px solid;padding:13px 16px;border-radius:9px;margin:15px 0}.note{background:#eaf4ff;border-color:#2980ef}.tip{background:#eaf8ef;border-color:#27a65b}.warn{background:#fff7df;border-color:#e2a500}.exam{background:#f1edff;border-color:#7656d6}
+details{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:10px 0;background:#fafcff}summary{cursor:pointer;font-weight:700}.badge{display:inline-block;padding:4px 9px;border-radius:20px;background:#e9f2ff;color:#1457b8;font-size:13px;font-weight:700;margin:3px}
+footer{text-align:center;color:var(--muted);padding:30px 15px}@media(max-width:700px){section{padding:19px}.container{padding:0 10px}pre{font-size:13px}th,td{font-size:14px}}
+</style></head>
+<body><header><div class="hero"><h1>C++ Day 4 — Final Revision & Mock</h1><p>Full Sessions 1–15 • Fast Revision • Comparisons • MCQs • Coding Mock</p>
+<p><span class="badge">C++17</span><span class="badge">PGCP-AC August 2026</span><span class="badge">Easy Revision Notes</span></p>
+</div></header><div class="container"><nav class="toc"><h2>📚 Contents</h2><a href="#map">Syllabus Map</a><a href="#basics">Basics</a><a href="#control">Control</a><a href="#pointers">Pointers</a><a href="#oop">OOP</a><a href="#inheritance">Inheritance</a><a href="#poly">Polymorphism</a><a href="#virtual">Virtual & Abstract</a><a href="#casts">Casts</a><a href="#exceptions">Exceptions</a><a href="#files">Files</a><a href="#templates">Templates/STL</a><a href="#comparisons">Comparisons</a><a href="#mcq">MCQs</a><a href="#coding">Coding Mock</a><a href="#checklist">Checklist</a></nav>
+<section id="map"><h2>1. Full Sessions 1–15 Map</h2><table><tr><th>Day</th><th>Sessions</th><th>Core areas</th></tr>
+<tr><td>Day 1</td><td>1–6</td><td>Basics, tokens, operators, control flow, arrays, functions, memory, pointers, smart pointers.</td></tr>
+<tr><td>Day 2</td><td>7–10</td><td>OOP, constructors/destructors, copy/move, static/const, inheritance, friend, polymorphism, operator overloading.</td></tr>
+<tr><td>Day 3</td><td>11–15</td><td>Virtual/pure virtual, abstract classes, casts, exceptions, streams/files, templates, STL, RTTI.</td></tr>
+<tr><td>Day 4</td><td>Revision</td><td>Fast recall, comparisons, MCQs and coding mock.</td></tr></table></section>
+
+<section id="basics"><h2>2. C++ Basics</h2><pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    cout &lt;&lt; "Hello World";
+    return 0;
+}</code></pre>
+<table><tr><th>Symbol</th><th>Meaning</th></tr><tr><td>cin</td><td>Standard input</td></tr><tr><td>cout</td><td>Standard output</td></tr><tr><td>&amp;x</td><td>Address of x</td></tr><tr><td>*p</td><td>Dereferenced value</td></tr><tr><td>new</td><td>Dynamic allocation</td></tr><tr><td>delete</td><td>Releases a single dynamically allocated object</td></tr><tr><td>this</td><td>Pointer to current object in a non-static member function</td></tr></table></section>
+
+<section id="control"><h2>3. Operators, Conditions, Loops and Arrays</h2>
+<table><tr><th>Topic</th><th>Quick recall</th></tr><tr><td>Arithmetic</td><td>+ - * / %</td></tr><tr><td>Relational</td><td>&lt; &gt; &lt;= &gt;= == !=</td></tr><tr><td>Logical</td><td>&amp;&amp; || !</td></tr><tr><td>Unary</td><td>One operand, e.g. ++x</td></tr><tr><td>Ternary</td><td>condition ? a : b</td></tr><tr><td>Assignment</td><td>= += -= *= /=</td></tr></table>
+<pre><code>if (condition) { }
+else { }
+
+switch (choice) {
+    case 1: break;
+    default: break;
+}
+
+for (int i = 0; i &lt; 5; i++) { }
+while (condition) { }
+do { } while (condition);</code></pre>
+<div class="exam"><b>MCQ trap:</b> do-while checks the condition after the body, so the body executes at least once when control reaches the loop.</div>
+<p><code>break</code> exits the loop/switch; <code>continue</code> skips to the next iteration; <code>return</code> exits the function.</p></section>
+
+<section><h2>4. Arrays, Functions and References</h2><pre><code>int a[5] = {10, 20, 30, 40, 50};
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int x = 10;
+int &amp;ref = x;</code></pre>
+<p>Reference = alias for an existing object. Pointer = stores an address and can be dereferenced.</p></section>
+
+<section id="pointers"><h2>5. Pointer Master Revision</h2><pre><code>int x = 10;
+int* p = &amp;x;
+
+cout &lt;&lt; &amp;x;  // address
+cout &lt;&lt; p;   // stored address
+cout &lt;&lt; *p;  // value at address
+*p = 20;      // changes x</code></pre>
+<pre><code>int* p = new int(10);
+delete p;
+
+int* a = new int[5];
+delete[] a;</code></pre>
+<div class="warn"><b>Important:</b> new[] pairs with delete[]. Single new pairs with delete.</div>
+<pre><code>Student s;
+Student* p = &amp;s;
+p-&gt;display();</code></pre>
+<table><tr><th>Smart pointer</th><th>Quick idea</th></tr><tr><td>unique_ptr</td><td>Exclusive ownership</td></tr><tr><td>shared_ptr</td><td>Shared ownership</td></tr><tr><td>weak_ptr</td><td>Non-owning weak reference</td></tr></table></section>
+
+<section id="oop"><h2>6. OOP + Constructors</h2>
+<div class="cardgrid"><div class="mini"><b>Encapsulation</b><p>Bundle data and methods.</p></div><div class="mini"><b>Abstraction</b><p>Expose essential behavior.</p></div><div class="mini"><b>Inheritance</b><p>Build from another class.</p></div><div class="mini"><b>Polymorphism</b><p>Different behavior through a common interface/name.</p></div></div>
+<table><tr><th>Concept</th><th>One-line revision</th></tr><tr><td>Constructor</td><td>Runs when an object is initialized.</td></tr><tr><td>Destructor</td><td>Runs when an object is destroyed.</td></tr><tr><td>Copy constructor</td><td>Initializes an object from another object.</td></tr><tr><td>Move constructor</td><td>Can transfer resources from a movable source.</td></tr><tr><td>Static member</td><td>Belongs to the class rather than each individual object.</td></tr><tr><td>Const member function</td><td>Marked const and cannot modify the object's non-mutable state through that function.</td></tr></table></section>
+
+<section id="inheritance"><h2>7. Inheritance + Diamond</h2><table><tr><th>Type</th><th>Pattern</th></tr><tr><td>Single</td><td>A → B</td></tr><tr><td>Multilevel</td><td>A → B → C</td></tr><tr><td>Multiple</td><td>A + B → C</td></tr><tr><td>Hierarchical</td><td>A → B, A → C</td></tr><tr><td>Hybrid</td><td>Combination</td></tr></table>
+<pre><code>class A {};
+class B : virtual public A {};
+class C : virtual public A {};
+class D : public B, public C {};</code></pre><p>Virtual inheritance addresses the duplicated shared-base-subobject issue in this diamond pattern.</p></section>
+
+<section id="poly"><h2>8. Polymorphism + Operator Overloading</h2><h3>Function Overloading</h3><pre><code>int add(int a, int b);
+double add(double a, double b);</code></pre><p>Same name with different parameter lists.</p><h3>Operator Overloading</h3><pre><code>Point operator+(const Point&amp; other) {
+    return Point(x + other.x);
+}</code></pre><p>Official lab operators include <code>=</code>, <code>==</code>, <code>+</code>, <code>++</code>, <code>--</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>[]</code>.</p></section>
+
+<section id="virtual"><h2>9. Runtime Polymorphism, Virtual, Pure Virtual and Abstract</h2><pre><code>class Animal {
+public:
+    virtual void sound() { cout &lt;&lt; "Animal"; }
+};
+class Dog : public Animal {
+public:
+    void sound() override { cout &lt;&lt; "Dog"; }
+};</code></pre>
+<pre><code>class Shape {
+public:
+    virtual void draw() = 0;
+};</code></pre>
+<table><tr><th>Virtual</th><th>Pure Virtual</th></tr><tr><td>Can have a base implementation.</td><td>Uses = 0 and contributes to making the class abstract.</td></tr><tr><td>Supports runtime dispatch through a suitable base pointer/reference.</td><td>Derived classes are expected to implement it when making a concrete class.</td></tr></table></section>
+
+<section id="casts"><h2>10. Four Casts</h2><table><tr><th>Cast</th><th>Remember</th></tr><tr><td>static_cast</td><td>Supported compile-time conversion.</td></tr><tr><td>dynamic_cast</td><td>Runtime-checked hierarchy cast.</td></tr><tr><td>const_cast</td><td>Changes const/volatile qualification.</td></tr><tr><td>reinterpret_cast</td><td>Low-level reinterpretation.</td></tr></table></section>
+
+<section id="exceptions"><h2>11. Exception Handling</h2><pre><code>try {
+    if (marks &lt; 0) throw marks;
+}
+catch (int x) {
+    cout &lt;&lt; "Invalid";
+}</code></pre><p><b>Flow:</b> try → throw → matching catch. Rethrow the current exception with <code>throw;</code> inside a catch block. Custom exception classes can carry error information.</p></section>
+
+<section id="files"><h2>12. Streams and File Handling</h2><pre><code>ofstream out("data.txt");
+out &lt;&lt; "Hello";
+out.close();
+
+ifstream in("data.txt");
+string line;
+while (getline(in, line))
+    cout &lt;&lt; line;
+in.close();</code></pre>
+<table><tr><th>Class</th><th>Use</th></tr><tr><td>istream</td><td>Input stream</td></tr><tr><td>ostream</td><td>Output stream</td></tr><tr><td>ifstream</td><td>Read file</td></tr><tr><td>ofstream</td><td>Write file</td></tr><tr><td>fstream</td><td>Read + write</td></tr></table></section>
+
+<section id="templates"><h2>13. Templates, STL and RTTI</h2><pre><code>template &lt;typename T&gt;
+T maxValue(T a, T b) {
+    return a &gt; b ? a : b;
+}</code></pre>
+<table><tr><th>STL container</th><th>Key word</th></tr><tr><td>vector</td><td>Dynamic sequence</td></tr><tr><td>stack</td><td>LIFO</td></tr><tr><td>queue</td><td>FIFO</td></tr><tr><td>map</td><td>Key/value</td></tr></table>
+<pre><code>cout &lt;&lt; typeid(*ptr).name();</code></pre><p><code>typeid</code> is a common RTTI feature.</p></section>
+
+<section id="comparisons"><h2>14. High-Value Exam Comparisons</h2><table><tr><th>Comparison</th><th>Remember</th></tr>
+<tr><td>Reference vs Pointer</td><td>Reference is an alias; pointer stores an address.</td></tr><tr><td>new vs delete</td><td>new allocates; delete releases a single object.</td></tr><tr><td>new[] vs delete[]</td><td>Array allocation pairs with array deletion.</td></tr><tr><td>Copy vs Move</td><td>Copy duplicates state/resource; move can transfer a resource.</td></tr><tr><td>Overloading vs Runtime polymorphism</td><td>Overloading uses different parameter lists; virtual dispatch selects an overridden implementation at runtime.</td></tr><tr><td>Virtual vs Pure virtual</td><td>Pure virtual uses = 0 and contributes to making a class abstract.</td></tr><tr><td>Stack vs Queue</td><td>Stack = LIFO; Queue = FIFO.</td></tr><tr><td>ifstream vs ofstream</td><td>ifstream reads; ofstream writes.</td></tr><tr><td>unique_ptr vs shared_ptr</td><td>Unique ownership vs shared ownership.</td></tr><tr><td>break vs continue</td><td>break exits; continue skips to next iteration.</td></tr></table></section>
+
+<section id="mcq"><h2>15. MCQ Mock</h2>
+<details><summary>Q1. If int *p points to x, what does *p represent?</summary><p><b>Answer:</b> The value stored in the object pointed to by p.</p></details>
+<details><summary>Q2. Which loop checks its condition after executing the body?</summary><p><b>Answer:</b> do-while.</p></details>
+<details><summary>Q3. Which constructor initializes one object from another?</summary><p><b>Answer:</b> Copy constructor.</p></details>
+<details><summary>Q4. Which keyword enables virtual dispatch?</summary><p><b>Answer:</b> virtual.</p></details>
+<details><summary>Q5. Which smart pointer represents shared ownership?</summary><p><b>Answer:</b> shared_ptr.</p></details>
+<details><summary>Q6. Which stream class is used for file output?</summary><p><b>Answer:</b> ofstream.</p></details>
+<details><summary>Q7. What marks a pure virtual function?</summary><p><b>Answer:</b> virtual void f() = 0;</p></details>
+<details><summary>Q8. Which STL container follows LIFO?</summary><p><b>Answer:</b> stack.</p></details>
+<details><summary>Q9. Which cast performs runtime checking in a polymorphic hierarchy?</summary><p><b>Answer:</b> dynamic_cast.</p></details>
+<details><summary>Q10. What does break do inside a loop?</summary><p><b>Answer:</b> It exits the loop.</p></details></section>
+
+<section id="coding"><h2>16. Coding Mock — 8 Programs</h2><ol>
+<li><b>Student class:</b> Data members, constructor, display and destructor.</li>
+<li><b>Shape hierarchy:</b> Abstract Shape + pure virtual function + Circle/Rectangle.</li>
+<li><b>Custom exception:</b> Throw when marks are outside the allowed range.</li>
+<li><b>File handling:</b> Write five names and read/display them using getline.</li>
+<li><b>Function template:</b> Generic maximum of two values.</li>
+<li><b>STL:</b> Programs using vector, stack, queue and map.</li>
+<li><b>Operator overloading:</b> Overload + and ==.</li>
+<li><b>Diamond inheritance:</b> Demonstrate virtual inheritance with a shared base.</li></ol>
+<div class="tip"><b>Mock rule:</b> First write the class relationship, then class code, then main(), then dry-run object creation and output.</div></section>
+
+<section id="checklist"><h2>17. Final Sessions 1–15 Checklist</h2><table><tr><th>✓</th><th>Topic</th></tr>
+<tr><td>□</td><td>Setup, history, C vs C++, features, C++17</td></tr><tr><td>□</td><td>Tokens, initialization, expressions, operators</td></tr><tr><td>□</td><td>Conditions, switch, loops, jumps, arrays, command-line arguments</td></tr><tr><td>□</td><td>Functions, prototypes, references, inline, math library</td></tr><tr><td>□</td><td>Memory, pointers, enum, typedef/type aliases</td></tr><tr><td>□</td><td>new/delete, object pointers, this, smart pointers</td></tr><tr><td>□</td><td>Classes, objects, access, namespaces, constructors/destructors</td></tr><tr><td>□</td><td>Copy/move, lvalue/rvalue, static/const</td></tr><tr><td>□</td><td>All inheritance types, virtual base, derived constructors</td></tr><tr><td>□</td><td>Friend functions/classes, function/operator overloading</td></tr><tr><td>□</td><td>Virtual/pure virtual, abstract class, interfaces, casts</td></tr><tr><td>□</td><td>Exceptions and custom exception class</td></tr><tr><td>□</td><td>Console I/O, streams, manipulators, file read/write</td></tr><tr><td>□</td><td>Function/class templates, STL stack/vector/queue/map</td></tr><tr><td>□</td><td>RTTI, MCQs and coding mock</td></tr></table>
+<h3>Final Memory Chain</h3><p><b>Basics → Operators → Control → Arrays → Functions → References → Pointers → Memory → OOP → Constructors → Inheritance → Polymorphism → Virtual → Exceptions → Files → Templates → STL → RTTI</b></p>
+<div class="exam"><b>Final revision order:</b> Comparison tables → 10 MCQs without answers → 8 coding programs → revisit mistakes.</div></section>
+</div><footer>C++17 • PGCP-AC August 2026 • Revision Notes</footer></body></html>
